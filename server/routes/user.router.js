@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
 const pool = require('../modules/pool')
 
 //template route
-router.get('/template', (req, res) => {
-  const queryText = `SELECT * FROM table;`;
+router.get('/', (req, res) => {
+  console.log('hi')
+  const queryText = `SELECT * FROM "user";`;
   pool.query(queryText)
       .then(result => {
+        console.log(result.rows);
         res.send(result.rows);
       })
       .catch(error => {
