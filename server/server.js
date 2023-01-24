@@ -1,17 +1,20 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const router = require('./routes/template.router.js');
+const userRouter = require('./routes/user.router');
 const port = process.env.PORT || 5000;
 
 /** ---------- MIDDLEWARE ---------- **/
-app.use(bodyParser.json()); // needed for angular requests
+
+// Body parser middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('build'));
 
 /** ---------- ROUTES ---------- **/
-app.use('/template', router);
+app.use('/user', userRouter);
 
 /** ---------- START SERVER ---------- **/
-app.listen(port, function () {
+app.listen(port, () => {
     console.log('Listening on port: ', port);
 });
